@@ -520,7 +520,7 @@ function reset_board_colours(){
 }
 
 function ai(){
-    var x; var y=[]; var z=[]; var tmp=arr; var u; var v; var w; var val=[]; var r=[]; var temp;
+    var x; var y=[]; var z=[]; var tmp=arr; var u; var v; var w; var val_1=[]; var r_1=[]; var temp;
 
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
@@ -532,13 +532,13 @@ function ai(){
             for(w=0;w<y[x][1].length;w++){
                 u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
-                val.push(total_value(arr)); r.push(y[x][0]+","+y[x][1][w]);
+                val_1.push(total_value(arr)); r_1.push(y[x][0]+","+y[x][1][w]);
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
         }
     }
     for(x=0;x<3;x++){
-        console.log("val: "+val[x]+"     r:"+r[x]);
+        console.log("val_1: "+val_1[x]+"     r_1:"+r_1[x]);
     }
     /*
     populate_board();
