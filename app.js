@@ -518,11 +518,27 @@ function reset_board_colours(){
         document.getElementById("box_"+l).style.backgroundColor="transparent";
     }
 }
-
+var val=[]; var r=[]; var uu=0; var vv=00;
 function ai(){
-    var x; var y=[]; var z=[]; var tmp=arr; var u; var v; var w; var val=[]; var r=[]; var s=0;
-    var uu=0; var vv=0;
+    find_moves();
+    ///////////////////////////////////////////////////////////////////
+    console.log("---------------------------------------------------------------------------");
+    console.log(r[0]);
+    uu=arr[r[0][1]]; vv=arr[r[0][0]];
+    arr[r[0][1]]=vv; arr[r[0][0]]=0;
+    find_moves();
+    arr[r[0][1]]=uu; arr[r[0][0]]=vv;
+    ///////////////////////////////////////////////////////////////////
+    console.log("---------------------------------------------------------------------------");
+    console.log(r[1]);
+    uu=arr[r[1][1]]; vv=arr[r[1][0]];
+    arr[r[1][1]]=vv; arr[r[1][0]]=0;
+    find_moves();
+    arr[r[1][1]]=uu; arr[r[1][0]]=vv;
 
+}
+function find_moves(){
+    var x; var y=[]; var z=[]; var w;
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
     }
@@ -531,10 +547,10 @@ function ai(){
             z.push(y[x]);
             console.log(y[x]);
             for(w=0;w<y[x][1].length;w++){
-                u=arr[y[x][0]]; v=arr[y[x][1][w]];
+                uu=arr[y[x][0]]; vv=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
                 val.push(total_value(arr)); r.push([y[x][0],y[x][1][w]]);
-                arr[y[x][0]]=u; arr[y[x][1][w]]=v;
+                arr[y[x][0]]=uu; arr[y[x][1][w]]=vv;
             }
         }
     }
@@ -542,41 +558,6 @@ function ai(){
         console.log("val: "+val[x]+"     r:"+r[x]);
     }
     y=[];z=[];
-    for(s=0;s<r.length;s++){
-        //console.log(r[s]);
-        u=arr[r[s][0]]; v=arr[r[s][1]];
-        //console.log("u:"+u); console.log("v:"+v);
-        arr[r[s][1]]=u; arr[r[s][0]]=0;
-        for(x=0;x<64;x++){
-            select(x);y.push([x,move]);select(x);
-        }
-        for(x=0;x<64;x++){
-            if(y[x][1].length>0 && arr[x]<0){
-                console.log(x);console.log("arr[x]:"+arr[x])
-                z.push(y[x]);
-                console.log(y[x]);
-                for(w=0;w<y[x][1].length;w++){
-                    uu=arr[y[x][0]]; vv=arr[y[x][1][w]];
-                    arr[y[x][1][w]]=uu; arr[y[x][0]]=0;
-                    //val.push(total_value(arr)); r.push([y[x][0],y[x][1][w]]);
-                    arr[y[x][0]]=uu; arr[y[x][1][w]]=vv;
-                }
-            }
-        }
-        //console.log("1. arr[r[s][0]]:"+arr[r[s][0]]); console.log("arr[r[s][1]]:"+arr[r[s][1]]);
-        arr[r[s][0]]=u; arr[r[s][1]]=v;
-        //console.log("2. arr[r[s][0]]:"+arr[r[s][0]]); console.log("arr[r[s][1]]:"+arr[r[s][1]]);
-    }
-
-
-    /*
-    populate_board();
-    if(n==6){
-        setTimeout(() => {
-            defeat_message();
-        }, 1000);
-    }
-    */
 }
 function total_value(a){
     var x=0; var t=0;
