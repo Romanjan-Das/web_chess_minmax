@@ -544,7 +544,7 @@ function find_moves(){
     }
     for(x=0;x<64;x++){
         if(y[x][1].length>0 && arr[x]<0){
-            z.push(y[x]);
+            //z.push(y[x]);
             console.log(y[x]);
             for(w=0;w<y[x][1].length;w++){
                 uu=arr[y[x][0]]; vv=arr[y[x][1][w]];
