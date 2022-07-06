@@ -520,7 +520,8 @@ function reset_board_colours(){
 }
 
 function ai(){
-    var x; var y=[]; var z=[]; var tmp=arr; var u; var v; var w; var val_1=[]; var r_1=[]; var temp;
+    var x; var y=[]; var z=[]; var tmp=arr; var u; var v; var w; var val=[]; var r=[]; var s=0;
+    var uu=0; var vv=0;
 
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
@@ -532,14 +533,42 @@ function ai(){
             for(w=0;w<y[x][1].length;w++){
                 u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
-                val_1.push(total_value(arr)); r_1.push(y[x][0]+","+y[x][1][w]);
+                val.push(total_value(arr)); r.push([y[x][0],y[x][1][w]]);
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
         }
     }
-    for(x=0;x<3;x++){
-        console.log("val_1: "+val_1[x]+"     r_1:"+r_1[x]);
+    for(x=0;x<r.length;x++){
+        console.log("val: "+val[x]+"     r:"+r[x]);
     }
+    y=[];z=[];
+    for(s=0;s<r.length;s++){
+        //console.log(r[s]);
+        u=arr[r[s][0]]; v=arr[r[s][1]];
+        //console.log("u:"+u); console.log("v:"+v);
+        arr[r[s][1]]=u; arr[r[s][0]]=0;
+        for(x=0;x<64;x++){
+            select(x);y.push([x,move]);select(x);
+        }
+        for(x=0;x<64;x++){
+            if(y[x][1].length>0 && arr[x]<0){
+                console.log(x);console.log("arr[x]:"+arr[x])
+                z.push(y[x]);
+                console.log(y[x]);
+                for(w=0;w<y[x][1].length;w++){
+                    uu=arr[y[x][0]]; vv=arr[y[x][1][w]];
+                    arr[y[x][1][w]]=uu; arr[y[x][0]]=0;
+                    //val.push(total_value(arr)); r.push([y[x][0],y[x][1][w]]);
+                    arr[y[x][0]]=uu; arr[y[x][1][w]]=vv;
+                }
+            }
+        }
+        //console.log("1. arr[r[s][0]]:"+arr[r[s][0]]); console.log("arr[r[s][1]]:"+arr[r[s][1]]);
+        arr[r[s][0]]=u; arr[r[s][1]]=v;
+        //console.log("2. arr[r[s][0]]:"+arr[r[s][0]]); console.log("arr[r[s][1]]:"+arr[r[s][1]]);
+    }
+
+
     /*
     populate_board();
     if(n==6){
