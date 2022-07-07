@@ -540,6 +540,14 @@ function ai(){
     console.log("---------------------------------------------------------------------------");
     console.log("r,val: "); console.log(r); console.log(val);
 
+    var s; var u; var v;
+    for(s=0;s<r.length;s++){
+        u=arr[r_s1[s][1]]; v=arr[r_s1[s][0]];
+        arr[r_s1[s][1]]=v; arr[r_s1[s][0]]=0;
+        console.log("x,y: "+r_s1[s][0]+","+r_s1[s][1]);
+        arr[r_s1[s][1]]=u; arr[r_s1[s][0]]=v;
+    }
+
 
 }
 function find_moves(stat){
