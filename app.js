@@ -521,24 +521,18 @@ function reset_board_colours(){
 var val=[]; var r=[]; var uu=0; var vv=00;
 function ai(){
     find_moves();
-    ///////////////////////////////////////////////////////////////////
-    console.log("---------------------------------------------------------------------------");
-    console.log(r[0]);
-    uu=arr[r[0][1]]; vv=arr[r[0][0]];
-    arr[r[0][1]]=vv; arr[r[0][0]]=0;
-    find_moves();
-    arr[r[0][1]]=uu; arr[r[0][0]]=vv;
-    ///////////////////////////////////////////////////////////////////
-    console.log("---------------------------------------------------------------------------");
-    console.log(r[1]);
-    uu=arr[r[1][1]]; vv=arr[r[1][0]];
-    arr[r[1][1]]=vv; arr[r[1][0]]=0;
-    find_moves();
-    arr[r[1][1]]=uu; arr[r[1][0]]=vv;
+    for(x=0;x<3;x++){
+        console.log("---------------------------------------------------------------------------");
+        console.log(r[x]);
+        uu=arr[r[x][1]]; vv=arr[r[x][0]];
+        arr[r[x][1]]=vv; arr[r[x][0]]=0;
+        find_moves();
+        arr[r[x][1]]=uu; arr[r[x][0]]=vv;
+    }
 
 }
 function find_moves(){
-    var x; var y=[]; var z=[]; var w;
+    var x; var y=[]; var z=[]; var w; var u; var v;
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
     }
@@ -547,10 +541,10 @@ function find_moves(){
             //z.push(y[x]);
             console.log(y[x]);
             for(w=0;w<y[x][1].length;w++){
-                uu=arr[y[x][0]]; vv=arr[y[x][1][w]];
+                u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
                 val.push(total_value(arr)); r.push([y[x][0],y[x][1][w]]);
-                arr[y[x][0]]=uu; arr[y[x][1][w]]=vv;
+                arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
         }
     }
