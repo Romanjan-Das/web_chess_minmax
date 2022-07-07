@@ -579,10 +579,8 @@ function find_moves(stat,b,c){
                     r_s2[b]=e;
                 }
                 else if(stat==3){
-                    f.push([y[x][0],y[x][1][w]]);
-                    g.push(f);
-                    console.log(g+","+b);
-                    r_s3.push(g);
+                    f.push([b,y[x][0],y[x][1][w]]);
+                    r_s3.push(f);
                 }
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
