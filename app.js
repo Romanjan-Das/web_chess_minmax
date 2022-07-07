@@ -520,11 +520,14 @@ function reset_board_colours(){
 }
 var val=[]; var r=[]; var uu=0; var vv=00; var r_temp=[]; var val_temp=[];
 function ai(){
-    var xx;
+    var xx; var xxx;
     find_moves();
     r=r_temp; r_temp=[];
     val=val_temp; val_temp=[];
-    for(x=0;x<3;x++){
+
+    console.log("r,val: "); console.log(r); console.log(val);
+
+    for(x=0;x<r.length;x++){
         console.log("---------------------------------------------------------------------------");
         console.log(r[x]);
         uu=arr[r[x][1]]; vv=arr[r[x][0]];
@@ -534,9 +537,7 @@ function ai(){
         r[x]=r_temp; r_temp=[];
         val[x]=val_temp; val_temp=[];
 
-        for(xx=0;xx<r.length;xx++){
-            console.log("val: "+val[xx]+"     r:"+r[xx]);
-        }
+        console.log("r,val: "); console.log(r); console.log(val);
     }
 
 }
