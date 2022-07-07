@@ -521,7 +521,7 @@ function reset_board_colours(){
 var val=[]; var r=[]; var uu=0; var vv=00; var r_temp=[]; var val_temp=[]; var r_s1=[]; var r_s2=[]; var r_s3=[];
 function ai(){
     console.clear();
-    find_moves(1,0);
+    find_moves(1,0,0);
     r=r_temp; r_temp=[];
     val=val_temp; val_temp=[];
 
@@ -530,7 +530,7 @@ function ai(){
     for(x=0;x<r.length;x++){
         uu=arr[r[x][1]]; vv=arr[r[x][0]];
         arr[r[x][1]]=vv; arr[r[x][0]]=0;
-        find_moves(2,x);
+        find_moves(2,x,0);
         arr[r[x][1]]=uu; arr[r[x][0]]=vv;
         r[x]=r_temp; r_temp=[];
         val[x]=val_temp; val_temp=[];
@@ -541,14 +541,13 @@ function ai(){
     console.log("r_s2: "); console.log(r_s2); //console.log(val);
 
     var s; var u; var v;
-    for(s=0;s<r.length;s++){
+    for(s=0;s<r_s1.length;s++){
         u=arr[r_s1[s][1]]; v=arr[r_s1[s][0]];
         arr[r_s1[s][1]]=v; arr[r_s1[s][0]]=0;
-        console.log("x,y: "+r_s1[s][0]+","+r_s1[s][1]);
-        for(x=0;x<r[s].length;x++){
+        for(x=0;x<r_s2[s].length;x++){
             uu=arr[r_s2[s][x][1]]; vv=arr[r_s2[s][x][0]];
             arr[r_s2[s][x][1]]=vv; arr[r_s2[s][x][0]]=0;
-            find_moves(3,s);
+            find_moves(3,s,x);
             arr[r_s2[s][x][1]]=uu; arr[r_s2[s][x][0]]=vv;
             r[x]=r_temp; r_temp=[];
             val[x]=val_temp; val_temp=[];
@@ -561,8 +560,8 @@ function ai(){
 
 
 }
-function find_moves(stat,b){
-    var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; var f=[];
+function find_moves(stat,b,c){
+    var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; var f=[]; var g=[];
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
     }
@@ -581,11 +580,12 @@ function find_moves(stat,b){
                 }
                 else if(stat==3){
                     f.push([y[x][0],y[x][1][w]]);
-                    r_s3[b]=f;
+                    g.push(f);
+                    r_s3[b]=g;
                 }
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
-            e=[];f=[];
+            e=[];f=[];g=[];
         }
     }
     y=[];z=[];
