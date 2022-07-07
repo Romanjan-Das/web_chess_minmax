@@ -518,9 +518,12 @@ function reset_board_colours(){
         document.getElementById("box_"+l).style.backgroundColor="transparent";
     }
 }
-var val=[]; var r=[]; var uu=0; var vv=00;
+var val=[]; var r=[]; var uu=0; var vv=00; var r_temp=[]; var val_temp=[];
 function ai(){
+    var xx;
     find_moves();
+    r=r_temp; r_temp=[];
+    val=val_temp; val_temp=[];
     for(x=0;x<3;x++){
         console.log("---------------------------------------------------------------------------");
         console.log(r[x]);
@@ -528,6 +531,12 @@ function ai(){
         arr[r[x][1]]=vv; arr[r[x][0]]=0;
         find_moves();
         arr[r[x][1]]=uu; arr[r[x][0]]=vv;
+        r[x]=r_temp; r_temp=[];
+        val[x]=val_temp; val_temp=[];
+
+        for(xx=0;xx<r.length;xx++){
+            console.log("val: "+val[xx]+"     r:"+r[xx]);
+        }
     }
 
 }
@@ -538,18 +547,13 @@ function find_moves(){
     }
     for(x=0;x<64;x++){
         if(y[x][1].length>0 && arr[x]<0){
-            //z.push(y[x]);
-            console.log(y[x]);
             for(w=0;w<y[x][1].length;w++){
                 u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
-                val.push(total_value(arr)); r.push([y[x][0],y[x][1][w]]);
+                val_temp.push(total_value(arr)); r_temp.push([y[x][0],y[x][1][w]]);
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
         }
-    }
-    for(x=0;x<r.length;x++){
-        console.log("val: "+val[x]+"     r:"+r[x]);
     }
     y=[];z=[];
 }
