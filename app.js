@@ -560,8 +560,9 @@ function ai(){
 
 
 }
+var g=[]; var b_prev=0;
 function find_moves(stat,b,c){
-    var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; var f=[]; var g=[];
+    var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; var f=[]; 
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
     }
@@ -579,12 +580,18 @@ function find_moves(stat,b,c){
                     r_s2[b]=e;
                 }
                 else if(stat==3){
-                    f.push([b,y[x][0],y[x][1][w]]);
-                    r_s3.push(f);
+                    if(b_prev==b){
+                        g.push([y[x][0],y[x][1][w]]);
+                    }
+                    else{
+                        g=[]; b_prev=b;
+                        g.push([y[x][0],y[x][1][w]]);
+                    }
+                    r_s3[b]=g;
                 }
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
-            e=[];f=[];g=[];
+            e=[];f=[];
         }
     }
     y=[];z=[];
