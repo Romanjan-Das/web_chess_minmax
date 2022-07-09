@@ -559,7 +559,7 @@ function ai(){
 }
 var g=[]; var f=[]; var b_prev=0; var c_prev=0; var f_prev=[];
 function find_moves(stat,b,c){
-    var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; 
+    var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; var kk=0;
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
     }
@@ -568,22 +568,23 @@ function find_moves(stat,b,c){
             for(w=0;w<y[x][1].length;w++){
                 u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
+                kk=total_value(arr);
                 r_temp.push([y[x][0],y[x][1][w]]);
                 if(stat==1){
-                    r_s1.push([y[x][0],y[x][1][w]]);
+                    r_s1.push([y[x][0],y[x][1][w],kk]);
                 }
                 else if(stat==2){
-                    e.push([y[x][0],y[x][1][w]]);
+                    e.push([y[x][0],y[x][1][w],kk]);
                     r_s2[b]=e;
                 }
                 else if(stat==3){
                     if(b_prev==b){
                         if(c_prev==c){
-                            f.push([y[x][0],y[x][1][w]]);
+                            f.push([y[x][0],y[x][1][w],kk]);
                         }
                         else{
                             f=[];
-                            f.push([y[x][0],y[x][1][w]]);
+                            f.push([y[x][0],y[x][1][w],kk]);
                             c_prev=c;
                         }
                         if(f_prev!=f){
@@ -593,7 +594,7 @@ function find_moves(stat,b,c){
                     }
                     else{
                         g=[]; f=[]; c_prev=c; b_prev=b;
-                        f.push([y[x][0],y[x][1][w]]);
+                        f.push([y[x][0],y[x][1][w],kk]);
                         if(f_prev!=f){
                             g.push(f);
                             f_prev=f;
