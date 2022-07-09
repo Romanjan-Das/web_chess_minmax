@@ -518,14 +518,13 @@ function reset_board_colours(){
         document.getElementById("box_"+l).style.backgroundColor="transparent";
     }
 }
-var val=[]; var r=[]; var uu=0; var vv=00; var r_temp=[]; var val_temp=[]; var r_s1=[]; var r_s2=[]; var r_s3=[];
+var val=[]; var r=[]; var uu=0; var vv=00; var r_temp=[]; var r_s1=[]; var r_s2=[]; var r_s3=[];
 function ai(){
     console.clear();
     find_moves(1,0,0);
     r=r_temp; r_temp=[];
-    val=val_temp; val_temp=[];
 
-    console.log("r_s1: "); console.log(r_s1); //console.log(val);
+    console.log("r_s1: "); console.log(r_s1);
 
     for(x=0;x<r.length;x++){
         uu=arr[r[x][1]]; vv=arr[r[x][0]];
@@ -533,12 +532,11 @@ function ai(){
         find_moves(2,x,0);
         arr[r[x][1]]=uu; arr[r[x][0]]=vv;
         r[x]=r_temp; r_temp=[];
-        val[x]=val_temp; val_temp=[];
 
     }
 
     console.log("---------------------------------------------------------------------------");
-    console.log("r_s2: "); console.log(r_s2); //console.log(val);
+    console.log("r_s2: "); console.log(r_s2);
 
     var s; var u; var v;
     for(s=0;s<r_s1.length;s++){
@@ -550,13 +548,12 @@ function ai(){
             find_moves(3,s,x);
             arr[r_s2[s][x][1]]=uu; arr[r_s2[s][x][0]]=vv;
             r[x]=r_temp; r_temp=[];
-            val[x]=val_temp; val_temp=[];
     
         }
         arr[r_s1[s][1]]=u; arr[r_s1[s][0]]=v;
     }
     console.log("---------------------------------------------------------------------------");
-    console.log("r_s3: "); console.log(r_s3); //console.log(val);
+    console.log("r_s3: "); console.log(r_s3);
 
 
 }
@@ -571,7 +568,7 @@ function find_moves(stat,b,c){
             for(w=0;w<y[x][1].length;w++){
                 u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
-                val_temp.push(total_value(arr)); r_temp.push([y[x][0],y[x][1][w]]);
+                r_temp.push([y[x][0],y[x][1][w]]);
                 if(stat==1){
                     r_s1.push([y[x][0],y[x][1][w]]);
                 }
@@ -602,7 +599,7 @@ function find_moves(stat,b,c){
                             f_prev=f;
                         }
                     }
-                    console.log("c:"+c+" b:"+b)
+                    //console.log("c:"+c+" b:"+b)
                     r_s3[b]=g;
                 }
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
