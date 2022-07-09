@@ -560,7 +560,7 @@ function ai(){
 
 
 }
-var g=[]; var f=[]; var b_prev=0; var c_prev=0;
+var g=[]; var f=[]; var b_prev=0; var c_prev=0; var f_prev=[];
 function find_moves(stat,b,c){
     var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; 
     for(x=0;x<64;x++){
@@ -589,12 +589,18 @@ function find_moves(stat,b,c){
                             f.push([y[x][0],y[x][1][w]]);
                             c_prev=c;
                         }
-                        g.push(f);
+                        if(f_prev!=f){
+                            g.push(f);
+                            f_prev=f;
+                        }
                     }
                     else{
                         g=[]; f=[]; c_prev=c; b_prev=b;
                         f.push([y[x][0],y[x][1][w]]);
-                        g.push(f);
+                        if(f_prev!=f){
+                            g.push(f);
+                            f_prev=f;
+                        }
                     }
                     console.log("c:"+c+" b:"+b)
                     r_s3[b]=g;
