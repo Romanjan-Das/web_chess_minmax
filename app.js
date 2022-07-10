@@ -14,18 +14,21 @@ function create_board(){
         img.setAttribute("id","img_"+i);
         j.setAttribute("class","box");
         j.setAttribute("id","box_"+i);
-        j.setAttribute("onclick","select("+i+");");
+        j.setAttribute("onclick","select("+i+"); pl_sel("+i+");");
         j.appendChild(img);
         board.appendChild(j);
     }
 }
+var move_sound;
 function populate_board(){
     var i;
     for(i=0;i<64;i++){
         document.getElementById("img_"+i).setAttribute("src","assets/"+arr[i]+".png");
     }
+    move_sound=document.getElementById("move_sound");
+    move_sound.play();
 }
-var move; var chosen=false; var prev;
+var move=[]; var chosen=false; var prev;
 function select(i){
     if(!chosen){ var n;
         if(arr[i]>0 || arr[i]<0){
@@ -651,9 +654,10 @@ function evaluate_moves(){
     populate_board();
     if(ef==6){
         setTimeout(() => {
-            window.alert("Computer wins !!");
+            defeat_message();
         }, 1500);
     }
+    ai_sel();
 }
 function total_value(a){
     var x=0; var t=0;
@@ -662,9 +666,31 @@ function total_value(a){
     }
     return t;
 }
+var victory_sound;
 function victory_message(){
     window.alert("Hurray! You win!!");
+    victory_sound=document.getElementById("victory_sound");
+    victory_sound.play();
 }
 function defeat_message(){
-    window.alert("Game Over. Blacks win!!");
+    window.alert("Game Over. Computer wins!!");
+    victory_sound=document.getElementById("victory_sound");
+    victory_sound.play();
+}
+var sel_st=0; var prev_sel=0;
+function pl_sel(p){
+    sel_st++;
+    if(sel_st==1){
+        prev_sel=p;
+    }
+    else if(sel_st==2 && prev_sel!=p){
+        sel_st=0;
+        document.getElementById("blank_screen").style.display="flex";
+    }
+    else if(sel_st==2){
+        sel_st=0;
+    }
+}
+function ai_sel(){
+    document.getElementById("blank_screen").style.display="none";
 }
