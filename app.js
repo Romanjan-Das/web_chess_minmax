@@ -614,7 +614,7 @@ function find_moves(stat,b,c,ii,jj){
     y=[];z=[];
 }
 function evaluate_moves(){
-    var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000;
+    var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000,ab=0,cd=0;
     for(x=0;x<r_s3.length;x++){
         for(y=0;y<r_s3[x].length;y++){
             for(z=0;z<r_s3[x][y].length;z++){
@@ -636,6 +636,19 @@ function evaluate_moves(){
         r_s1[x][2]=tmp2;
         tmp2=-1000;
     }
+
+    for(x=0;x<r_s1.length;x++){
+        if(tmp1>r_s1[x][2]){
+            ab=r_s1[x][0];
+            cd=r_s1[x][1];
+            tmp1=r_s1[x][2];
+        }
+    }
+    tmp1=1000;
+    console.log(ab+","+cd);
+
+    arr[cd]=arr[ab]; arr[ab]=0;
+    populate_board();
 }
 function total_value(a){
     var x=0; var t=0;
