@@ -557,6 +557,8 @@ function ai(){
     }
     console.log("---------------------------------------------------------------------------");
     console.log("r_s3: "); console.log(r_s3);
+
+    evaluate_moves();
 }
 var g=[]; var f=[]; var b_prev=0; var c_prev=0; var f_prev=[];
 function find_moves(stat,b,c,ii,jj){
@@ -610,6 +612,30 @@ function find_moves(stat,b,c,ii,jj){
         }
     }
     y=[];z=[];
+}
+function evaluate_moves(){
+    var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000;
+    for(x=0;x<r_s3.length;x++){
+        for(y=0;y<r_s3[x].length;y++){
+            for(z=0;z<r_s3[x][y].length;z++){
+                if(tmp3>r_s3[x][y][z][2]){
+                    tmp3=r_s3[x][y][z][2];
+                }
+            }
+            r_s2[x][y][2]=tmp3;
+            tmp3=1000;
+        }
+    }
+
+    for(x=0;x<r_s2.length;x++){
+        for(y=0;y<r_s2[x].length;y++){
+            if(tmp2<r_s2[x][y][2]){
+                tmp2=r_s2[x][y][2];
+            }
+        }
+        r_s1[x][2]=tmp2;
+        tmp2=-1000;
+    }
 }
 function total_value(a){
     var x=0; var t=0;
