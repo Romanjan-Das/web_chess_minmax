@@ -1,5 +1,5 @@
 //var arr=[-4,-3,-2,-5,-6,-2,-3,-4,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,4,3,2,5,6,2,3,4];
-var arr=[0,-3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var arr=[0,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 function main(){
     create_board();
     populate_board();
@@ -524,23 +524,23 @@ function ai(){
     val=[]; r=[]; uu=0; vv=00; r_temp=[]; r_s1=[]; r_s2=[]; r_s3=[];
 
     console.clear();
-    find_moves(1,0,0);
+    find_moves(1,0,0,0,-10);
     r=r_temp; r_temp=[];
 
     console.log("r_s1: "); console.log(r_s1);
 
-    for(x=0;x<r.length;x++){
-        uu=arr[r[x][1]]; vv=arr[r[x][0]];
-        arr[r[x][1]]=vv; arr[r[x][0]]=0;
-        find_moves(2,x,0);
-        arr[r[x][1]]=uu; arr[r[x][0]]=vv;
+    for(x=0;x<r_s1.length;x++){
+        uu=arr[r_s1[x][1]]; vv=arr[r_s1[x][0]];
+        arr[r_s1[x][1]]=vv; arr[r_s1[x][0]]=0;
+        find_moves(2,x,0,10,0);
+        arr[r_s1[x][1]]=uu; arr[r_s1[x][0]]=vv;
         r[x]=r_temp; r_temp=[];
 
     }
 
     console.log("---------------------------------------------------------------------------");
     console.log("r_s2: "); console.log(r_s2);
-
+/*
     var s; var u; var v;
     for(s=0;s<r_s1.length;s++){
         u=arr[r_s1[s][1]]; v=arr[r_s1[s][0]];
@@ -548,7 +548,7 @@ function ai(){
         for(x=0;x<r_s2[s].length;x++){
             uu=arr[r_s2[s][x][1]]; vv=arr[r_s2[s][x][0]];
             arr[r_s2[s][x][1]]=vv; arr[r_s2[s][x][0]]=0;
-            find_moves(3,s,x);
+            find_moves(3,s,x,0,-10);
             arr[r_s2[s][x][1]]=uu; arr[r_s2[s][x][0]]=vv;
             r[x]=r_temp; r_temp=[];
     
@@ -557,17 +557,17 @@ function ai(){
     }
     console.log("---------------------------------------------------------------------------");
     console.log("r_s3: "); console.log(r_s3);
-
+*/
 
 }
 var g=[]; var f=[]; var b_prev=0; var c_prev=0; var f_prev=[];
-function find_moves(stat,b,c){
+function find_moves(stat,b,c,ii,jj){
     var x; var y=[]; var z=[]; var w; var u; var v; var e=[]; var kk=0;
     for(x=0;x<64;x++){
         select(x);y.push([x,move]);select(x);
     }
     for(x=0;x<64;x++){
-        if(y[x][1].length>0 && arr[x]<0){
+        if(y[x][1].length>0 && arr[x]<ii && arr[x]>jj){
             for(w=0;w<y[x][1].length;w++){
                 u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
@@ -608,7 +608,7 @@ function find_moves(stat,b,c){
                 }
                 arr[y[x][0]]=u; arr[y[x][1][w]]=v;
             }
-            e=[];
+            
         }
     }
     y=[];z=[];
