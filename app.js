@@ -1,5 +1,5 @@
 var arr=[-4,-3,-2,-5,-6,-2,-3,-4,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,4,3,2,5,6,2,3,4];
-//var arr=[0,-1,-1,-1,0,0,0,-2,0,-4,0,0,0,0,0,0,0,0,0,0,-4,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//var arr=[0,-1,-1,-1,0,0,0,-2,0,-4,0,0,-6,0,0,0,0,0,0,0,-4,0,0,0,0,0,0,0,5,0,0,0,1,1,1,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 function main(){
     create_board();
     populate_board();
@@ -523,7 +523,7 @@ function ai(){
     g=[]; f=[]; b_prev=0; c_prev=0; f_prev=[];
     val=[]; r=[]; uu=0; vv=00; r_temp=[]; r_s1=[]; r_s2=[]; r_s3=[];
 
-    console.clear();
+    //console.clear();
     find_moves(1,0,0,0,-10);
     r=r_temp; r_temp=[];
 
@@ -614,7 +614,7 @@ function find_moves(stat,b,c,ii,jj){
     y=[];z=[];
 }
 function evaluate_moves(){
-    var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000,ab=0,cd=0;
+    var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000,ab=0,cd=0,ef=0;
     for(x=0;x<r_s3.length;x++){
         for(y=0;y<r_s3[x].length;y++){
             for(z=0;z<r_s3[x][y].length;z++){
@@ -646,9 +646,14 @@ function evaluate_moves(){
     }
     tmp1=1000;
     //console.log(ab+","+cd);
-
+    ef=arr[cd];
     arr[cd]=arr[ab]; arr[ab]=0;
     populate_board();
+    if(ef==6){
+        setTimeout(() => {
+            window.alert("Computer wins !!");
+        }, 1500);
+    }
 }
 function total_value(a){
     var x=0; var t=0;
