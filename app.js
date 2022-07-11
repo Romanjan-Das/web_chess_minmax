@@ -1,5 +1,5 @@
 var arr=[-4,-3,-2,-5,-6,-2,-3,-4,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,4,3,2,5,6,2,3,4];
-//var arr=[0,-1,-1,-1,0,0,0,-2,0,-4,0,0,-6,0,0,0,0,0,0,0,-4,0,0,0,0,0,0,0,5,0,0,0,1,1,1,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//var arr=[0,-1,-1,-1,0,0,0,0,0,0,0,-5,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,1,1,1,0,-5,6,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 function main(){
     create_board();
     populate_board();
@@ -668,12 +668,16 @@ function total_value(a){
 }
 var victory_sound;
 function victory_message(){
-    window.alert("Hurray! You win!!");
+    //window.alert("Hurray! You win!!");
+    document.getElementById("inner_message").innerHTML="Hurray! You win!!";
+    document.getElementById("blank_screen_2").style.display="flex";
     victory_sound=document.getElementById("victory_sound");
     victory_sound.play();
 }
 function defeat_message(){
-    window.alert("Game Over. Computer wins!!");
+    //window.alert("Game Over. Computer wins!!");
+    document.getElementById("inner_message").innerHTML="Game Over.<br>Computer wins!!";
+    document.getElementById("blank_screen_2").style.display="flex";
     victory_sound=document.getElementById("victory_sound");
     victory_sound.play();
 }

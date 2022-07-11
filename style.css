@@ -25,6 +25,21 @@ body{
     width: 30px; height: 30px; border: 6px grey solid; border-top-color: white; animation-name: anim_rotate;
     animation-duration: 1s; animation-iteration-count: infinite; border-radius: 50%; margin-right: 8px;
 }
+#blank_screen_2{
+    position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2; background-color: rgba(0, 0, 0, 0.244);
+    display: none; justify-content: center; align-items: center;
+}
+#message{
+    width: 300px; height: 300px; padding: 8px; background-color: white; display: flex; align-items: center; justify-content: center;
+    font-size: larger; color: blue; flex-direction: column; border: 5px blue solid; background-image: url("assets/fireworks.gif");
+    background-size: cover;
+}
+#inner_message{
+    font-size: x-large; text-align: center;
+}
+#replay_button{
+    margin-top: 25px;
+}
 @keyframes anim_rotate {
     to{transform: rotate(360deg);} from{transform: rotate(0deg);}
 }
