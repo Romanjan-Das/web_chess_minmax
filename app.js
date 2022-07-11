@@ -1,5 +1,5 @@
 //var arr=[-4,-3,-2,-5,-6,-2,-3,-4,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,4,3,2,5,6,2,3,4];
-var arr=[0,-1,-1,-1,0,0,0,0,0,0,0,-5,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,1,1,1,0,-5,6,3,2,0,0,0,0,0,0,-1,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var arr=[0,-1,-1,-1,0,0,0,0,0,0,0,-5,-6,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,1,1,1,0,-5,6,3,2,0,0,0,0,0,0,-1,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 function main(){
     create_board();
     populate_board();
@@ -103,6 +103,9 @@ function select(i){
                 if(i==move[k]){ n=arr[i];
                     arr[i]=arr[prev];
                     arr[prev]=0;
+                    if(arr[i]==1 && i<8){
+                        arr[i]=5;
+                    }
                     reset_board_colours();
                     populate_board();
                     chosen=false;
@@ -574,6 +577,12 @@ function find_moves(stat,b,c,ii,jj){
             for(w=0;w<y[x][1].length;w++){
                 u=arr[y[x][0]]; v=arr[y[x][1][w]];
                 arr[y[x][1][w]]=arr[y[x][0]]; arr[y[x][0]]=0;
+                if(arr[y[x][1][w]]==-1 && y[x][1][w]>55){
+                    arr[y[x][1][w]]=-5;
+                }
+                if(arr[y[x][1][w]]==1 && y[x][1][w]<8){
+                    arr[y[x][1][w]]=5;
+                }
                 kk=total_value(arr);
                 r_temp.push([y[x][0],y[x][1][w]]);
                 if(stat==1){
@@ -659,6 +668,12 @@ function evaluate_moves(){
     //console.log(ab+","+cd);
     ef=arr[cd];
     arr[cd]=arr[ab]; arr[ab]=0;
+    if(arr[cd]==-1 && cd>55){
+        arr[cd]=-5;
+    }
+    if(arr[cd]==1 && cd<8){
+        arr[cd]=5;
+    }
     populate_board();
     if(ef==6){
         setTimeout(() => {
