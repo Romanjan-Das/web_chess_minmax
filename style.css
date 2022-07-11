@@ -13,19 +13,20 @@ body{
     width: 90%; height: 90%;
 }
 #blank_screen{
-    position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1; background-color: rgba(0, 0, 0, 0.100);
+    position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1; background-color: rgba(0, 0, 0, 0);
     display: none; justify-content: center;
 }
 #loading_image{
-    width: 60px; height: 60px; margin-top: 40vh; border: 10px white solid; border-top-color: aqua; border-radius: 50%;
-    animation-name: loading_animation;
-    animation-duration: 300ms;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    width: fit-content; height: fit-content; padding: 8px; background-color: rgba(255, 255, 255, 0.362); 
+    color: black; font-size: larger; 
+    margin-top: 40vh; display: flex; align-items: center; justify-content: center;
 }
-@keyframes loading_animation {
-    from{transform: rotate(0deg);}
-    to{transform: rotate(360deg);}
+#anim{
+    width: 30px; height: 30px; border: 6px grey solid; border-top-color: white; animation-name: anim_rotate;
+    animation-duration: 1s; animation-iteration-count: infinite; border-radius: 50%; margin-right: 8px;
+}
+@keyframes anim_rotate {
+    to{transform: rotate(360deg);} from{transform: rotate(0deg);}
 }
 @media (orientation:landscape) {
     body{
