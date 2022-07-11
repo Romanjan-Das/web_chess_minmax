@@ -14,7 +14,7 @@ function create_board(){
         img.setAttribute("id","img_"+i);
         j.setAttribute("class","box");
         j.setAttribute("id","box_"+i);
-        j.setAttribute("onclick","pl_sel("+i+"); select("+i+");");
+        j.setAttribute("onclick","pl_sel("+i+"); select_white("+i+");");
         j.appendChild(img);
         board.appendChild(j);
     }
@@ -684,4 +684,15 @@ function pl_sel(p){
 }
 function ai_sel(){
     document.getElementById("blank_screen").style.display="none";
+}
+var white_selected=false;
+function select_white(p){
+    if(arr[p]>0){
+        select(p);
+        white_selected=true;
+    }
+    else if(white_selected && arr[p]<=0 && (document.getElementById("box_"+p).style.backgroundColor=="cyan" || document.getElementById("box_"+p).style.backgroundColor=="magenta")){
+        select(p);
+        white_selected=false;
+    }
 }
