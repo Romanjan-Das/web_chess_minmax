@@ -14,7 +14,7 @@ function create_board(){
         img.setAttribute("id","img_"+i);
         j.setAttribute("class","box");
         j.setAttribute("id","box_"+i);
-        j.setAttribute("onclick","select("+i+"); pl_sel("+i+");");
+        j.setAttribute("onclick","pl_sel("+i+"); select("+i+");");
         j.appendChild(img);
         board.appendChild(j);
     }
@@ -677,18 +677,9 @@ function defeat_message(){
     victory_sound=document.getElementById("victory_sound");
     victory_sound.play();
 }
-var sel_st=0; var prev_sel=0;
 function pl_sel(p){
-    sel_st++;
-    if(sel_st==1){
-        prev_sel=p;
-    }
-    else if(sel_st==2 && prev_sel!=p){
-        sel_st=0;
+    if(document.getElementById("box_"+p).style.backgroundColor=="cyan"){
         document.getElementById("blank_screen").style.display="flex";
-    }
-    else if(sel_st==2){
-        sel_st=0;
     }
 }
 function ai_sel(){
