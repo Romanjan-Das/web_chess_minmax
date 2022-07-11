@@ -1,5 +1,5 @@
-//var arr=[-4,-3,-2,-5,-6,-2,-3,-4,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,4,3,2,5,6,2,3,4];
-var arr=[0,-1,-1,-1,0,0,0,0,0,0,0,-5,-6,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,1,1,1,0,-5,6,3,2,0,0,0,0,0,0,-1,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var arr=[-4,-3,-2,-5,-6,-2,-3,-4,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,4,3,2,5,6,2,3,4];
+//var arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 function main(){
     create_board();
     populate_board();
@@ -551,14 +551,17 @@ function ai(){
     for(s=0;s<r_s1.length;s++){
         u=arr[r_s1[s][1]]; v=arr[r_s1[s][0]];
         arr[r_s1[s][1]]=v; arr[r_s1[s][0]]=0;
-        for(x=0;x<r_s2[s].length;x++){
-            uu=arr[r_s2[s][x][1]]; vv=arr[r_s2[s][x][0]];
-            arr[r_s2[s][x][1]]=vv; arr[r_s2[s][x][0]]=0;
-            find_moves(3,s,x,0,-10);
-            arr[r_s2[s][x][1]]=uu; arr[r_s2[s][x][0]]=vv;
-            r[x]=r_temp; r_temp=[];
-    
+        if(r_s2[s]!=undefined){
+            for(x=0;x<r_s2[s].length;x++){
+                uu=arr[r_s2[s][x][1]]; vv=arr[r_s2[s][x][0]];
+                arr[r_s2[s][x][1]]=vv; arr[r_s2[s][x][0]]=0;
+                find_moves(3,s,x,0,-10);
+                arr[r_s2[s][x][1]]=uu; arr[r_s2[s][x][0]]=vv;
+                r[x]=r_temp; r_temp=[];
+        
+            }        
         }
+
         arr[r_s1[s][1]]=u; arr[r_s1[s][0]]=v;
     }
     //console.log("---------------------------------------------------------------------------");
@@ -628,29 +631,35 @@ function find_moves(stat,b,c,ii,jj){
 function evaluate_moves(){
     var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000,ab=0,cd=0,ef=0;
     for(x=0;x<r_s3.length;x++){
-        for(y=0;y<r_s3[x].length;y++){
-            for(z=0;z<r_s3[x][y].length;z++){
-                if(tmp3>r_s3[x][y][z][2]){
-                    tmp3=r_s3[x][y][z][2];
+        if(r_s3[x]!=undefined){
+            for(y=0;y<r_s3[x].length;y++){
+                for(z=0;z<r_s3[x][y].length;z++){
+                    if(tmp3>r_s3[x][y][z][2]){
+                        tmp3=r_s3[x][y][z][2];
+                    }
                 }
+                if(r_s2[x][y][2]>tmp3){
+                    r_s2[x][y][2]=tmp3;
+                }
+                tmp3=1000;
             }
-            if(r_s2[x][y][2]>tmp3){
-                r_s2[x][y][2]=tmp3;
-            }
-            tmp3=1000;
         }
+
     }
 
     for(x=0;x<r_s2.length;x++){
-        for(y=0;y<r_s2[x].length;y++){
-            if(tmp2<r_s2[x][y][2]){
-                tmp2=r_s2[x][y][2];
+        if(r_s2[x]!=undefined){
+            for(y=0;y<r_s2[x].length;y++){
+                if(tmp2<r_s2[x][y][2]){
+                    tmp2=r_s2[x][y][2];
+                }
             }
+            if(r_s1[x][2]<tmp2){
+                r_s1[x][2]=tmp2;
+            }
+            tmp2=-1000;
         }
-        if(r_s1[x][2]<tmp2){
-            r_s1[x][2]=tmp2;
-        }
-        tmp2=-1000;
+
     }
     for(x=0;x<r_s1.length;x++){
         if(tmp1>r_s1[x][2]){
