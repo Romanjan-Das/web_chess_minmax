@@ -638,9 +638,7 @@ function evaluate_moves(){
                         tmp3=r_s3[x][y][z][2];
                     }
                 }
-                if(r_s2[x][y][2]>tmp3){
-                    r_s2[x][y][2]=tmp3;
-                }
+                r_s2[x][y][2]=tmp3;
                 tmp3=1000;
             }
         }
@@ -654,9 +652,7 @@ function evaluate_moves(){
                     tmp2=r_s2[x][y][2];
                 }
             }
-            if(r_s1[x][2]<tmp2){
-                r_s1[x][2]=tmp2;
-            }
+            r_s1[x][2]=tmp2;
             tmp2=-1000;
         }
 
