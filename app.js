@@ -18,6 +18,10 @@ function create_board(){
         j.appendChild(img);
         board.appendChild(j);
     }
+    if(window.innerHeight>window.innerWidth){
+        document.body.style.paddingTop=window.innerHeight/5+"px"; 
+        document.getElementById("loading_image").style.marginTop=(window.innerHeight/5+210)+"px";
+    }
 }
 var move_sound;
 function populate_board(){

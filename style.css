@@ -45,11 +45,12 @@ body{
 }
 @media (orientation:landscape) {
     body{
-        display: flex; height: 90vh; align-items: center; justify-content: center;
+        display: flex; height: 90vh; align-items: center; justify-content: center; background-color: gainsboro;
     }
 }
 @media (orientation:portrait){
     body{
-        height: 100vh; padding-top: 40%;
+        box-sizing: border-box; background-image: url("assets/monkey_chess.jpg");
+        background-repeat: no-repeat;
     }
 }
