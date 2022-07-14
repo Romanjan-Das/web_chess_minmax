@@ -633,7 +633,7 @@ function find_moves(stat,b,c,ii,jj){
     y=[];z=[];
 }
 function evaluate_moves(){
-    var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000,ab=0,cd=0,ef=0;
+    var x,y,z,tmp3=1000,tmp2=-1000,tmp1=1000,ab=0,cd=0,ef=0; var m_arr=[]; var rnd=0;
     for(x=0;x<r_s3.length;x++){
         if(r_s3[x]!=undefined){
             for(y=0;y<r_s3[x].length;y++){
@@ -673,6 +673,20 @@ function evaluate_moves(){
             break;
         }
     }
+    //console.clear();
+    for(x=0;x<r_s1.length;x++){
+        if(r_s1[x][2]==tmp1){
+            m_arr.push([r_s1[x][0],r_s1[x][1],r_s1[x][2]]);
+            //console.log([r_s1[x][0],r_s1[x][1],r_s1[x][2]]);
+        }
+        if(arr[r_s1[x][1]]==6){
+            m_arr=[];
+            m_arr.push([r_s1[x][0],r_s1[x][1],r_s1[x][2]]);
+            break;
+        }     
+    }
+    rnd=Math.floor(Math.random()*m_arr.length);
+    ab=m_arr[rnd][0]; cd=m_arr[rnd][1];
     tmp1=1000;
     //console.log(ab+","+cd);
     ef=arr[cd];
